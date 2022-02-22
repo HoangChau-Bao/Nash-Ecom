@@ -1,0 +1,28 @@
+﻿@page
+@model Rookie.Ecom.Customer.Pages.CategoryModel
+@{
+
+
+}
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Create Date
+        </th>
+    </tr>
+    @foreach (var item in Model.Category)
+    {
+     <tr>
+         <td>
+             @item.Id;
+         </td>
+         <td>
+             @item.CreatedDate;
+         </td>
+     </tr> 
+    }
+</table>
+
