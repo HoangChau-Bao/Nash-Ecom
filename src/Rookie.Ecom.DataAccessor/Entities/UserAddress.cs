@@ -7,15 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Rookie.Ecom.DataAccessor.Entities
 {
-    public class Order:BaseEntity
+    public class UserAddress : BaseEntity
     {
         public Guid? UserID { get; set; }
 
         public User User { get; set; }
 
-        public int OrderTotal { get; set; }
-
-        public ICollection<OrderDetail> OrderDetail { get; set; }
+        public string Address { get; set; }
 
     }
 }

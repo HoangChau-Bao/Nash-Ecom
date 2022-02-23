@@ -14,7 +14,7 @@ namespace Rookie.Ecom.DataAccessor.Entities
         [StringLength(maximumLength: 100)]
         public string Desc { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal UnitPrice { get; set; }
 
         public decimal? Cost { get; set; }
 
@@ -26,6 +26,15 @@ namespace Rookie.Ecom.DataAccessor.Entities
 
         public Category Category { get; set; }
 
+
+        public Guid? BrandId { get; set; }
+
+        public Brand Brand { get; set; }
+
+        public ICollection<ProductRating> ProductRatings { get; set; }
+
         public ICollection<ProductPicture> ProductPictures { get; set; }
+
+        public ICollection<OrderDetail> OrderDetail { get; set; }
     }
 }

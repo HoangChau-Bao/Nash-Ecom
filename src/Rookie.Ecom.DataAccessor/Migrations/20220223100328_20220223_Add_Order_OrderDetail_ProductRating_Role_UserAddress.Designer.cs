@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rookie.Ecom.DataAccessor.Data;
 
 namespace Rookie.Ecom.DataAccessor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220223100328_20220223_Add_Order_OrderDetail_ProductRating_Role_UserAddress")]
+    partial class _20220223_Add_Order_OrderDetail_ProductRating_Role_UserAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.Brand", b =>
@@ -131,9 +133,6 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                     b.Property<Guid?>("OrderID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProductID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("ProductQuantity")
                         .HasColumnType("int");
 
@@ -155,8 +154,6 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("OrderDetail");
                 });
@@ -407,12 +404,6 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                     b.HasOne("Rookie.Ecom.DataAccessor.Entities.Order", null)
                         .WithMany("OrderDetail")
                         .HasForeignKey("OrderID");
-
-                    b.HasOne("Rookie.Ecom.DataAccessor.Entities.Product", "Product")
-                        .WithMany("OrderDetail")
-                        .HasForeignKey("ProductID");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.Product", b =>
@@ -489,8 +480,6 @@ namespace Rookie.Ecom.DataAccessor.Migrations
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.Product", b =>
                 {
-                    b.Navigation("OrderDetail");
-
                     b.Navigation("ProductPictures");
 
                     b.Navigation("ProductRatings");

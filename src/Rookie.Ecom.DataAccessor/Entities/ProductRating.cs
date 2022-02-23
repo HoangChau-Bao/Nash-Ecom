@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace Rookie.Ecom.DataAccessor.Entities
 {
-    public class Order:BaseEntity
+    public class ProductRating:BaseEntity
     {
         public Guid? UserID { get; set; }
 
         public User User { get; set; }
 
-        public int OrderTotal { get; set; }
+        public Guid? ProductID { get; set; }
 
-        public ICollection<OrderDetail> OrderDetail { get; set; }
+        public Product product { get; set; }
+
+        public string Comment { get; set; }
+
+        public int Rating { get; set; }
 
     }
 }

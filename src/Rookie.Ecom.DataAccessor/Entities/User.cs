@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Rookie.Ecom.DataAccessor.Entities
@@ -15,6 +16,11 @@ namespace Rookie.Ecom.DataAccessor.Entities
 
         public bool Gender { get; set; }
 
+        public ICollection<ProductRating> ProductRating { get; set; }
+
+        public ICollection<Role> Role { get; set; }
+
+        public ICollection<UserAddress> UserAddress { get; set; }
 
 
         //public Guid? ProductId { get; set; }
