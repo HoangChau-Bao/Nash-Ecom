@@ -17,19 +17,19 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public int Quantity { get; set; }
 
-        public Guid? CategoryId { get; set; }
+        //public Guid? CategoryId { get; set; }
 
-        public CategoryDto Category { get; set; }
+        //public CategoryDto Category { get; set; }
 
 
-        public Guid? BrandId { get; set; }
+        //public Guid? BrandId { get; set; }
 
-        public BrandDto Brand { get; set; }
+        //public BrandDto Brand { get; set; }
 
-        public ICollection<ProductRatingDto> ProductRatings { get; set; }
+        //public ICollection<ProductRatingDto> ProductRatings { get; set; }
 
-        public ICollection<ProductPictureDto> ProductPictures { get; set; }
+        //public ICollection<ProductPictureDto> ProductPictures { get; set; }
 
-        public ICollection<OrderDetailDto> OrderDetail { get; set; }
+        //public ICollection<OrderDetailDto> OrderDetail { get; set; }
     }
 }

@@ -19,6 +19,14 @@ namespace Rookie.Ecom.Business
             CreateMap<ProductDto, Product>();
 
             CreateMap<ProductPictureDto, ProductPicture>();
+
+            CreateMap<BrandDto, Brand>();
+
+            CreateMap<OrderDto, Order>();
+
+            CreateMap<OrderDetailDto, OrderDetail>();
+
+            CreateMap<ProductRatingDto, ProductRating>();
         }
 
         private void FromDataAccessorLayer()
@@ -26,6 +34,10 @@ namespace Rookie.Ecom.Business
             CreateMap<Category, CategoryDto>();
             CreateMap<Product, ProductDto>();
             CreateMap<ProductPicture, ProductPictureDto>();
+            CreateMap<Brand, BrandDto>();
+            CreateMap<Order, OrderDto>();
+            CreateMap<OrderDetail, OrderDetailDto>();
+            CreateMap<ProductRating, ProductRatingDto>();
         }
     }
 }

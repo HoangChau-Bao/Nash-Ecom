@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Rookie.Ecom.Contracts.Dtos
 {
-    public class ProductRatingDto
+    public class ProductRatingDto : BaseDto
     {
-        public Guid? UserID { get; set; }
+        //public Guid? UserID { get; set; }
 
-        public UserDto User { get; set; }
+        //public UserDto User { get; set; }
 
-        public Guid? ProductID { get; set; }
+        //public Guid? ProductID { get; set; }
 
-        public ProductDto product { get; set; }
+        //public ProductDto product { get; set; }
 
         public string Comment { get; set; }
 

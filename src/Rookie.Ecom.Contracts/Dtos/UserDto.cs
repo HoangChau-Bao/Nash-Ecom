@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rookie.Ecom.Contracts.Dtos
 {
-    public class UserDto
+    public class UserDto : BaseDto
     {
         public string Name { get; set; }
 
@@ -16,10 +16,10 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public bool Gender { get; set; }
 
-        public ICollection<ProductRatingDto> ProductRating { get; set; }
+        //public ICollection<ProductRatingDto> ProductRating { get; set; }
 
-        public ICollection<RoleDto> Role { get; set; }
+        //public ICollection<RoleDto> Role { get; set; }
 
-        public ICollection<UserAddressDto> UserAddress { get; set; }
+        //public ICollection<UserAddressDto> UserAddress { get; set; }
     }
 }
