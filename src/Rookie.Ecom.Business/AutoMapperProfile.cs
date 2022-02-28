@@ -25,6 +25,7 @@ namespace Rookie.Ecom.Business
             CreateMap<OrderDto, Order>();
 
             CreateMap<OrderDetailDto, OrderDetail>();
+                
 
             CreateMap<ProductRatingDto, ProductRating>();
         }

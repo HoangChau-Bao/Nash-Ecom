@@ -20,7 +20,7 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public Guid? ProductID { get; set; }
 
-        public ProductDto Product { get; set; }
+        //public string ProductName { get; set; }
 
     }
 }

@@ -17,12 +17,12 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public int Quantity { get; set; }
 
-        //public Guid? CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         //public CategoryDto Category { get; set; }
 
 
-        //public Guid? BrandId { get; set; }
+        public Guid? BrandId { get; set; }
 
         //public BrandDto Brand { get; set; }
 
