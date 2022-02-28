@@ -24,7 +24,6 @@ namespace Rookie.Ecom.Admin.Validators
             RuleFor(m => m.Quantity)
                 .NotEmpty()
                 .WithMessage(x => string.Format(ErrorTypes.Common.RequiredError, nameof(x.Quantity)));
-
         }
     }
 }
