@@ -4,8 +4,10 @@ using Rookie.Ecom.Business.Interfaces;
 using Rookie.Ecom.Contracts;
 using Rookie.Ecom.Contracts.Constants;
 using Rookie.Ecom.Contracts.Dtos;
+using Rookie.Ecom.DataAccessor.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Rookie.Ecom.Admin.Controllers
@@ -14,6 +16,8 @@ namespace Rookie.Ecom.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private object _baseRepository;
+
         public ProductController(IProductService productService)
         {
             _productService = productService;
