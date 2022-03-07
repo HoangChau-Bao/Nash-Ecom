@@ -17,6 +17,10 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public int Quantity { get; set; }
 
+        public double Weight { get; set; }
+
+        public Guid? ProductGroupId { get; set; }
+
         public Guid? CategoryId { get; set; }
 
         //public CategoryDto Category { get; set; }

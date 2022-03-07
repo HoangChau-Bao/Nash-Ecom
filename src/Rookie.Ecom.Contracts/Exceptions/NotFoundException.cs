@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace Rookie.Ecom.Contracts
+namespace Rookie.Ecom.Contracts.Exceptions
 {
     public class NotFoundException : Exception
     {
@@ -14,7 +14,7 @@ namespace Rookie.Ecom.Contracts
         }
 
         public NotFoundException(string message, params object[] args)
-            : base(String.Format(CultureInfo.CurrentCulture, message, args))
+            : base(string.Format(CultureInfo.CurrentCulture, message, args))
         {
         }
     }

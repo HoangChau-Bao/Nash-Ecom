@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Rookie.Ecom.Business
+namespace Rookie.Ecom.Business.Extensions
 {
     public static class SetPropertyExtension
     {

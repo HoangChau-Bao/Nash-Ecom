@@ -13,7 +13,7 @@ namespace Rookie.Ecom.DataAccessor.Interfaces
 
         Task<T> GetByIdAsync(object id);
 
-        Task<T> GetByAsync(Expression<Func<T, bool>> filter = null, string includeProperties = "");
+        Task<T> GetByAsync(Expression<Func<T, bool>> filter, string includeProperties = "");
 
         Task<IEnumerable<T>> GetAllAsync();
 

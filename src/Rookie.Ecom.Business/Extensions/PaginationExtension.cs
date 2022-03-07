@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Rookie.Ecom.Business
+namespace Rookie.Ecom.Business.Extensions
 {
     public static class DataPagerExtension
     {
@@ -18,7 +18,7 @@ namespace Rookie.Ecom.Business
 
             var paged = new PagedModel<TModel>();
 
-            page = (page <= 0) ? 1 : page;
+            page = page <= 0 ? 1 : page;
 
             paged.CurrentPage = page;
             paged.PageSize = limit;

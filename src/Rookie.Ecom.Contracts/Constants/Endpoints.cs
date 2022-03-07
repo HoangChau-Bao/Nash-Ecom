@@ -9,5 +9,6 @@ namespace Rookie.Ecom.Contracts.Constants
         public const string Product = "api/product";
         public const string ProductPicture = "api/product-picture";
         public const string ProductRating = "api/product-rating";
+        public const string ProductGroup = "api/product-group";
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rookie.Ecom.DataAccessor.Data;
 using Rookie.Ecom.DataAccessor.Interfaces;
+using Rookie.Ecom.DataAccessor.Migrations;
 
 namespace Rookie.Ecom.DataAccessor
 {

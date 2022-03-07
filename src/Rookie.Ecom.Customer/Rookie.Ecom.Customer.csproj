@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Rookie.Ecom.Contracts\Rookie.Ecom.Contracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

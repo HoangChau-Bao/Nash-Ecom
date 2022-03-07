@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Rookie.Ecom.DataAccessor
+namespace Rookie.Ecom.DataAccessor.Migrations
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
@@ -30,7 +30,7 @@ namespace Rookie.Ecom.DataAccessor
         public async Task DeleteAsync(object id)
         {
             var entity = await _dbContext.Set<T>().FindAsync(id);
-            _dbContext.Remove<T>(entity);
+            _dbContext.Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
 

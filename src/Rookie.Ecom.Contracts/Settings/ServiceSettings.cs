@@ -1,4 +1,4 @@
-namespace Rookie.Ecom.Contracts
+namespace Rookie.Ecom.Contracts.Settings
 {
     public class ServiceSettings
     {

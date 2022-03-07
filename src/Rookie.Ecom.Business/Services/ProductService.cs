@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Rookie.Ecom.Business.Extensions;
 using Rookie.Ecom.Business.Interfaces;
 using Rookie.Ecom.Contracts;
 using Rookie.Ecom.Contracts.Dtos;
@@ -8,6 +9,7 @@ using Rookie.Ecom.DataAccessor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -86,6 +88,12 @@ namespace Rookie.Ecom.Business.Services
                 TotalItems = assets.TotalItems,
                 Items = _mapper.Map<IEnumerable<ProductDto>>(assets.Items)
             };
+        }
+
+        public async Task<ProductDto> GetByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "")
+        {
+            var product = await _baseRepository.GetByAsync(filter, includeProperties);
+            return _mapper.Map<ProductDto>(product);
         }
     }
 }

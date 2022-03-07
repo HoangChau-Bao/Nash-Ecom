@@ -20,6 +20,8 @@ namespace Rookie.Ecom.DataAccessor.Entities
 
         public bool IsFeatured { get; set; }
 
+        public double Weight { get; set; }
+
         public int Quantity { get; set; }
 
         public Guid? CategoryId { get; set; }
@@ -30,6 +32,10 @@ namespace Rookie.Ecom.DataAccessor.Entities
         public Guid? BrandId { get; set; }
 
         public Brand Brand { get; set; }
+
+        public Guid? ProductGroupId { get; set; }
+
+        public ProductGroup ProductGroup { get; set; }
 
         public ICollection<ProductRating> ProductRatings { get; set; }
 

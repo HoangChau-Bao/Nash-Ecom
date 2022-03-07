@@ -11,7 +11,6 @@ namespace Rookie.Ecom.Contracts.Dtos
         public string Name { get; set; }
 
         public string Decription { get; set; }
-        public object Desc { get; set; }
 
         //public ICollection<ProductDto> Product { get; set; }
     }

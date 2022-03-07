@@ -16,7 +16,7 @@ namespace Rookie.Ecom.DataAccessor.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.Brand", b =>
@@ -195,6 +195,9 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("ProductGroupId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("Pubished")
                         .HasColumnType("bit");
 
@@ -207,13 +210,44 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("ProductGroupId");
+
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.ProductGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Pubished")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductGroup");
                 });
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.ProductPicture", b =>
@@ -425,9 +459,15 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("Rookie.Ecom.DataAccessor.Entities.ProductGroup", "ProductGroup")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductGroupId");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
+
+                    b.Navigation("ProductGroup");
                 });
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.ProductPicture", b =>
@@ -494,6 +534,11 @@ namespace Rookie.Ecom.DataAccessor.Migrations
                     b.Navigation("ProductPictures");
 
                     b.Navigation("ProductRatings");
+                });
+
+            modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.ProductGroup", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Rookie.Ecom.DataAccessor.Entities.User", b =>

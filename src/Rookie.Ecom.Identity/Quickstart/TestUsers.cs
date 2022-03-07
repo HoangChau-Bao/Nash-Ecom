@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using IdentityServer4;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Rookie.Ecom.Identity.Quickstart
 {
     public class TestUsers
     {
@@ -24,7 +24,7 @@ namespace IdentityServerHost.Quickstart.UI
                     postal_code = 69118,
                     country = "Germany"
                 };
-                
+
                 return new List<TestUser>
                 {
                     new TestUser
