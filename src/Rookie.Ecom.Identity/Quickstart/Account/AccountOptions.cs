@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Rookie.Ecom.Identity.Quickstart.Account
+namespace IdentityServerHost.Quickstart.UI
 {
     public class AccountOptions
     {

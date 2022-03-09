@@ -16,10 +16,10 @@ namespace Rookie.Ecom.Customer.Pages
 
         public ProductDto product { get; set; }
 
-        public string Name = "string";
+        public string Name = "Rule 1 Proteins";
         public void OnGet()
         {
-            product = _productService.GetByNameAsync(Name).Result;
+            product = _productService.GetByAsync(x=>x.Name == Name , "ProductPictures").Result;
         }
     }
 }

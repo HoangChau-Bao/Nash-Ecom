@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Rookie.Ecom.Identity.Quickstart.Diagnostics
+namespace IdentityServerHost.Quickstart.UI
 {
     public class DiagnosticsViewModel
     {

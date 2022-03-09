@@ -14,9 +14,8 @@ using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
-using Rookie.Ecom.Identity.Quickstart;
 
-namespace Rookie.Ecom.Identity.Quickstart.Consent
+namespace IdentityServerHost.Quickstart.UI
 {
     /// <summary>
     /// This controller processes the consent UI

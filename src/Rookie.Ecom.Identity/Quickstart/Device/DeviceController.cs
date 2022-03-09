@@ -16,9 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Rookie.Ecom.Identity.Quickstart.Consent;
 
-namespace Rookie.Ecom.Identity.Quickstart.Device
+namespace IdentityServerHost.Quickstart.UI
 {
     [Authorize]
     [SecurityHeaders]

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Rookie.Ecom.Identity.Quickstart.Diagnostics
+namespace IdentityServerHost.Quickstart.UI
 {
     [SecurityHeaders]
     [Authorize]

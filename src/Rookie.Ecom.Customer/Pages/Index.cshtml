@@ -58,24 +58,24 @@
                 </div>
             </div>
         </div>
-        <div class="row featured__filter">    
-           @foreach (var item in Model.ListProduct)
+        <div class="row featured__filter">
+            @foreach (var item in Model.ListItem.Items)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                                <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="featured__item__text">
-                                <h6><a asp-area="" asp-page="/ProductDetail">@item.Name</a></h6>
-                                <h5>@item.Cost</h5>
-                            </div>
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="@item.ProductPictures.FirstOrDefault().PictureUrl">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a asp-area="" asp-page="/ProductDetail">@item.Name</a></h6>
+                            <h5>@item.Cost</h5>
                         </div>
                     </div>
+                </div>
             }
         </div>
     </div>
@@ -302,4 +302,3 @@
     </div>
 </section>
 <!-- Latest Product Section End -->
-

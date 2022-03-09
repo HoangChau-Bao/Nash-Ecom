@@ -16,7 +16,7 @@ namespace Rookie.Ecom.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
-        private object _baseRepository;
+        //private object _baseRepository;
 
         public ProductController(IProductService productService)
         {

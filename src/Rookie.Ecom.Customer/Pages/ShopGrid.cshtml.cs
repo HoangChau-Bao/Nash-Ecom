@@ -17,10 +17,10 @@ namespace Rookie.Ecom.Customer.Pages
             _productService = productService;
         }
 
-        public IEnumerable<ProductDto> listProduct { get; set; }
+        public PagedResponseModel<ProductDto> listProduct { get; set; }
         public void OnGet(string search)
         {
-            listProduct = _productService.PagedQueryAsync(search, 1, 10).Result.Items;
+            listProduct = _productService.PagedQueryAsync(x => x.Name != null, 1, 10, "ProductPictures").Result;
         }
     }
 }

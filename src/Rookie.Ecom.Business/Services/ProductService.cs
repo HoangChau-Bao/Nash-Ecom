@@ -69,11 +69,21 @@ namespace Rookie.Ecom.Business.Services
             return _mapper.Map<ProductDto>(product);
         }
 
-        public async Task<PagedResponseModel<ProductDto>> PagedQueryAsync(string name, int page, int limit)
+        public async Task<PagedResponseModel<ProductDto>> PagedQueryAsync(Expression<Func<Product, bool>> filter, int page, int limit, string includeProperties = "")
         {
             var query = _baseRepository.Entities;
 
-            query = query.Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name));
+            if (includeProperties != null)
+            {
+                foreach (var property in includeProperties.Split(','))
+                {
+                    query = query.Include(property);
+                }
+            }
+
+            //query = query.Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name));
+
+            query = query.Where(filter);
 
             query = query.OrderBy(x => x.Name);
 

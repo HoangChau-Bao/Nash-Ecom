@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Rookie.Ecom.Business.Interfaces;
+using Rookie.Ecom.Contracts;
 using Rookie.Ecom.Contracts.Dtos;
 using Rookie.Ecom.DataAccessor.Entities;
 using System;
@@ -13,25 +14,21 @@ namespace Rookie.Ecom.Customer.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
 
         private IProductService _productService;
+        private IProductPictureService _productPicture;
 
-        /*public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }*/
-
-        public IndexModel(IProductService productService)
+        public IndexModel(IProductService productService, IProductPictureService productPicture)
         {
             _productService = productService;
+            _productPicture = productPicture;
         }
 
-        public IEnumerable<ProductDto> ListProduct { get; set; }
+        public PagedResponseModel<ProductDto> ListItem { get; set; }
 
         public void OnGet()
         {
-            ListProduct = _productService.GetAllAsync().Result;
+            ListItem = _productService.PagedQueryAsync(x => x.Name != null, 1, 10, "ProductPictures").Result;
         }
     }
 }

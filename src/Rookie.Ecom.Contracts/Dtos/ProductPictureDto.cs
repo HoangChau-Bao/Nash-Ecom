@@ -10,6 +10,6 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         public Guid? ProductId { get; set; }
 
-        //public ProductDto Product { get; set; }
+        public ProductDto Product { get; set; }
     }
 }

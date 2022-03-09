@@ -14,7 +14,7 @@ namespace Rookie.Ecom.Business.Interfaces
     {
         Task<IEnumerable<ProductDto>> GetAllAsync();
 
-        Task<PagedResponseModel<ProductDto>> PagedQueryAsync(string name, int page, int limit);
+        Task<PagedResponseModel<ProductDto>> PagedQueryAsync(Expression<Func<Product, bool>> filter, int page, int limit, string includeProperties = "");
 
         Task<ProductDto> GetByIdAsync(Guid id);
 
@@ -26,6 +26,6 @@ namespace Rookie.Ecom.Business.Interfaces
 
         Task UpdateAsync(ProductDto productDto);
 
-        Task<ProductDto> GetByAsync(Expression<Func<Product, bool>> filter = null, string includeProperties = "");
+        Task<ProductDto> GetByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "");
     }
 }

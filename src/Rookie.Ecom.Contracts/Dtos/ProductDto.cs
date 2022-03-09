@@ -32,7 +32,7 @@ namespace Rookie.Ecom.Contracts.Dtos
 
         //public ICollection<ProductRatingDto> ProductRatings { get; set; }
 
-        //public ICollection<ProductPictureDto> ProductPictures { get; set; }
+        public ICollection<ProductPictureDto> ProductPictures { get; set; }
 
         //public ICollection<OrderDetailDto> OrderDetail { get; set; }
     }

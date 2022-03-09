@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace Rookie.Ecom.Identity.Quickstart.Consent
+namespace IdentityServerHost.Quickstart.UI
 {
     public class ConsentViewModel : ConsentInputModel
     {

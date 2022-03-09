@@ -3,7 +3,7 @@ using IdentityServer4.Models;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Rookie.Ecom.Identity.Quickstart
+namespace IdentityServerHost.Quickstart.UI
 {
     public static class Extensions
     {
