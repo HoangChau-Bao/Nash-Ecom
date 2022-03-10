@@ -2,6 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
 <!-- Categories Section Begin -->
@@ -71,8 +72,8 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a asp-area="" asp-page="/ProductDetail">@item.Name</a></h6>
-                            <h5>@item.Cost</h5>
+                            <h6><a style="cursor:pointer" onclick="onProductNameClick('@(item.Id)')">@item.Name (@item.Weight kg)</a></h6>
+                            <h5>@string.Format(format, "{0:C}", @item.Cost)</h5>
                         </div>
                     </div>
                 </div>
@@ -302,3 +303,8 @@
     </div>
 </section>
 <!-- Latest Product Section End -->
+<script>
+    function onProductNameClick(id){
+        location.href = "/ProductDetail?productid=" + id;
+    }
+</script>

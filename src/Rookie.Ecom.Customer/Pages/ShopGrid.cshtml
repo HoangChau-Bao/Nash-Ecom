@@ -360,7 +360,8 @@
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="#">@item.Name</a></h6>
+
+                                        <h6><a style="cursor:pointer" onclick="onProductNameClick('@(item.Id)')">@item.Name (@item.Weight kg)</a></h6>
                                         <h5>@string.Format(format, "{0:C}", @item.Cost)</h5>
                                     </div>
                                 </div>
@@ -390,3 +391,9 @@
     </div>
 </section>
 <!-- Product Section End -->
+
+<script>
+    function onProductNameClick(id){
+        location.href = "/ProductDetail?productid=" + id;
+    }
+</script>
