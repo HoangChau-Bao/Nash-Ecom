@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Rookie.Ecom.Business.Interfaces;
@@ -26,9 +27,17 @@ namespace Rookie.Ecom.Customer.Pages
 
         public PagedResponseModel<ProductDto> ListItem { get; set; }
 
+        [BindProperty]
+        public string pId { get; set; }
+
         public void OnGet()
         {
             ListItem = _productService.PagedQueryAsync(x => x.Name != null, 1, 10, "ProductPictures").Result;
+        }
+
+        [Authorize]
+        public void OnPost(string pId)
+        {
         }
     }
 }

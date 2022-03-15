@@ -88,8 +88,8 @@ namespace Rookie.Ecom.Identity
                 },
                 new Client
                 {
-                    ClientName = "Rookie.Ecom.Web",
-                    ClientId = "rookieecom",
+                    ClientName = "Rookie.Ecom.Admin",
+                    ClientId = "rookieecomadmin",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = new List<string>()
                     {
@@ -107,13 +107,39 @@ namespace Rookie.Ecom.Identity
                     },
                     ClientSecrets =
                     {
-                        new Secret("rookieecom".Sha256())
+                        new Secret("rookieecomadmin".Sha256())
                     },
                     //AllowedCorsOrigins = new List<string>
                     //{
                     //    "https://localhost:5011/"
                     //},
                     AllowAccessTokensViaBrowser = true
+                },
+                new Client
+                {
+                    ClientName = "Rookie.Ecom.Customer",
+                    ClientId = "rookieecomcustomer",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RedirectUris = new List<string>()
+                    {
+                        "https://localhost:5002/signin-oidc"
+                    },
+                    PostLogoutRedirectUris = new List<string>()
+                    {
+                        "https://localhost:5002/"
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles"
+                    },
+                    ClientSecrets =
+                    {
+                        new Secret("rookieecomcustomer".Sha256())
+                    },
+                    AllowAccessTokensViaBrowser = true
+
                 }
             };
         }

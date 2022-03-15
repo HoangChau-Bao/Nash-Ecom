@@ -83,7 +83,6 @@
         </div>
     </div>
     <!-- Humberger End -->
-
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -106,7 +105,19 @@
                                 <a href="https://pinterest.com"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+
+                                @if (Context.User.Identity.IsAuthenticated)
+                                {
+                                    <a class="nav-item nav-link">Welcome, @User.Claims.Where(m=>m.Type=="given_name").SingleOrDefault().Value.ToString()  @User.Claims.Where(m=>m.Type=="family_name").SingleOrDefault().Value.ToString()</a>
+                                    <a href="/login" class="nav-item nav-link">Logout</a>
+                                }
+                                else
+                                {
+                                    <a href="/login"><i class="fa fa-user"></i> Đăng nhập</a>
+                                    @*<a href="/login" class="nav-item nav-link">Login</a> *@
+                                    <a href="" class="nav-item nav-link">Đăng ký</a>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -124,7 +135,8 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a class="nav-link text-dark" asp-area="" asp-page="/Index">Trang chủ</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-page="/ShopGrid">Sản phẩm</a>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/ShopGrid">Sản phẩm</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a asp-page="#">Whey Proteins</a></li>
                                     <li><a asp-page="#">BCAA Amino Acid</a></li>
@@ -179,7 +191,7 @@
                                     @*<div class="hero__search__categories">
                                         Tất cả
                                         <span class="arrow_carrot-down"></span>
-                                    </div>*@
+                                        </div>*@
                                     <input type="text" name="search" placeholder="Nhập tên sản phẩm muốn tìm ?">
                                     <button type="submit" class="site-btn">Tìm kiếm</button>
                                 </form>

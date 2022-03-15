@@ -10,6 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using IdentityServer4.EntityFramework.DbContexts;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using IdentityServer4.EntityFramework.Mappers;
+using System.Security.Claims;
+using IdentityModel;
 
 namespace Rookie.Ecom.Identity
 {
@@ -30,11 +35,11 @@ namespace Rookie.Ecom.Identity
         {
             string connectionString = _config.GetConnectionString("DbConnection");
 
-            services.AddDbContext<AppDbContext>(config =>
+            /*services.AddDbContext<AppDbContext>(config =>
             {
                 config.UseSqlServer(connectionString);
 
-            });
+            });*/
 
             services.AddCors(options =>
             {
@@ -49,30 +54,55 @@ namespace Rookie.Ecom.Identity
 
             services.AddMvc();
 
+
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
-                .AddTestUsers(InitData.GetUsers())
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
-                            sql => sql.MigrationsAssembly(assembly));
-                })
-                // this adds the operational data from DB (codes, tokens, consents)
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
-                            sql => sql.MigrationsAssembly(assembly));
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString, b =>
+                    b.MigrationsAssembly(assembly)
+                ));
 
-                    // this enables automatic token cleanup. this is optional.
-                    options.TokenCleanupInterval = 30;
-                })
-                //.AddAspNetIdentity<AppDbUser>()
-                .AddInMemoryIdentityResources(InitData.GetIdentityResources())
-                .AddInMemoryClients(InitData.GetClients());
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.Password.RequiredLength = 4;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireDigit = false;
+                config.Password.RequireUppercase = false;
+            })
+           .AddEntityFrameworkStores<AppDbContext>()
+           .AddDefaultTokenProviders();
+
+            /*services.AddDefaultIdentity<IdentityUser, IdentityRole>()
+           .AddEntityFrameworkStores<AppDbContext>()
+           .AddDefaultTokenProviders();*/
+
+
+
+            services.AddIdentityServer()
+            .AddDeveloperSigningCredential()
+            .AddTestUsers(InitData.GetUsers())
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer(connectionString,
+                        sql => sql.MigrationsAssembly(assembly));
+            })
+            // this adds the operational data from DB (codes, tokens, consents)
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer(connectionString,
+                        sql => sql.MigrationsAssembly(assembly));
+
+                // this enables automatic token cleanup. this is optional.
+                options.TokenCleanupInterval = 30;
+            })
+            .AddAspNetIdentity<IdentityUser>()
+            .AddInMemoryIdentityResources(InitData.GetIdentityResources())
+            .AddInMemoryClients(InitData.GetClients());
         }
 
 
@@ -87,13 +117,66 @@ namespace Rookie.Ecom.Identity
             app.UseIdentityServer();
             app.UseStaticFiles();
             app.UseRouting();
-
+            InitializeDatabase(app);
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=home}/{action=Index}/{id?}");
             });
+        }
+
+
+        private async void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in InitData.GetClients())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in InitData.GetIdentityResources())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                /*if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in InitData.GetApiResources())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }*/
+
+                var userManager = serviceScope.ServiceProvider
+                  .GetRequiredService<UserManager<IdentityUser>>();
+
+                var user = new IdentityUser("hoang");
+                /*userManager.CreateAsync(user, "hoang").GetAwaiter().GetResult();*/
+                //userManager.CreateAsync(user, "Ho123@@").GetAwaiter().GetResult();
+
+
+                //var user2 = new IdentityUser("hoang123");               
+                //userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim[] { new Claim(JwtClaimTypes.GivenName, "Hoang Chau") });
+                userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim(JwtClaimTypes.GivenName, "Hoang"));
+                userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim(JwtClaimTypes.FamilyName, "Chau"));
+                Console.WriteLine("");
+            }
         }
     }
 }
