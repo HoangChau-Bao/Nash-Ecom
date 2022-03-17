@@ -1,8 +1,10 @@
 ﻿using Rookie.Ecom.Contracts;
 using Rookie.Ecom.Contracts.Dtos;
+using Rookie.Ecom.DataAccessor.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,5 +25,7 @@ namespace Rookie.Ecom.Business.Interfaces
         Task DeleteAsync(Guid id)
 ;
         Task UpdateAsync(ProductRatingDto productRatingDto);
+
+        Task<IEnumerable<ProductRatingDto>> GetAllByAsync(Expression<Func<ProductRating, bool>> filter, string includeProperties = "");
     }
 }

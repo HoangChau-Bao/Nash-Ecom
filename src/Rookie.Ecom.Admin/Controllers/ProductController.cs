@@ -53,9 +53,13 @@ namespace Rookie.Ecom.Admin.Controllers
         public async Task<ProductDto> GetByIdAsync(Guid id)
             => await _productService.GetByIdAsync(id);
 
+/*        [HttpGet]
+        public async Task<IEnumerable<ProductDto>> GetAllByAsync()
+            => await _productService.GetAllByAsync(null, "");
+
         [HttpGet]
-        public async Task<IEnumerable<ProductDto>> GetAsync()
-            => await _productService.GetAllAsync();
+        public async Task<ProductDto> GetByAsync()
+            => await _productService.GetByAsync(null, "");*/
 
         [HttpGet("find")]
         public async Task<PagedResponseModel<ProductDto>>

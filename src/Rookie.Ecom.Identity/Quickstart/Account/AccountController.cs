@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rookie.Ecom.Identity.Data;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,8 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
+        private readonly AppDbContext _appDbContext;
+        private readonly IUserClaimsPrincipalFactory<IdentityUser> _claimsFactory;
 
         public AccountController(
             IIdentityServerInteractionService interaction,

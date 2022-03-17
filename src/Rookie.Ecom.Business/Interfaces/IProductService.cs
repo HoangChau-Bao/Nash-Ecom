@@ -27,5 +27,7 @@ namespace Rookie.Ecom.Business.Interfaces
         Task UpdateAsync(ProductDto productDto);
 
         Task<ProductDto> GetByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "");
+
+        Task<IEnumerable<ProductDto>> GetAllByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "");
     }
 }

@@ -35,11 +35,11 @@ namespace Rookie.Ecom.Identity
         {
             string connectionString = _config.GetConnectionString("DbConnection");
 
-            /*services.AddDbContext<AppDbContext>(config =>
+            services.AddDbContext<AppDbContext>(config =>
             {
                 config.UseSqlServer(connectionString);
 
-            });*/
+            });
 
             services.AddCors(options =>
             {
@@ -57,10 +57,10 @@ namespace Rookie.Ecom.Identity
 
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
-            services.AddDbContext<AppDbContext>(options =>
+            /*services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString, b =>
                     b.MigrationsAssembly(assembly)
-                ));
+                ));*/
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie();
@@ -153,29 +153,6 @@ namespace Rookie.Ecom.Identity
                     }
                     context.SaveChanges();
                 }
-
-                /*if (!context.ApiResources.Any())
-                {
-                    foreach (var resource in InitData.GetApiResources())
-                    {
-                        context.ApiResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }*/
-
-                var userManager = serviceScope.ServiceProvider
-                  .GetRequiredService<UserManager<IdentityUser>>();
-
-                var user = new IdentityUser("hoang");
-                /*userManager.CreateAsync(user, "hoang").GetAwaiter().GetResult();*/
-                //userManager.CreateAsync(user, "Ho123@@").GetAwaiter().GetResult();
-
-
-                //var user2 = new IdentityUser("hoang123");               
-                //userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim[] { new Claim(JwtClaimTypes.GivenName, "Hoang Chau") });
-                userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim(JwtClaimTypes.GivenName, "Hoang"));
-                userManager.AddClaimAsync(userManager.FindByNameAsync("hoang").GetAwaiter().GetResult(), new Claim(JwtClaimTypes.FamilyName, "Chau"));
-                Console.WriteLine("");
             }
         }
     }

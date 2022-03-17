@@ -16,7 +16,7 @@ namespace Rookie.Ecom.DataAccessor.Entities
 
         public bool Gender { get; set; }
 
-        public ICollection<ProductRating> ProductRating { get; set; }
+        //public ICollection<ProductRating> ProductRating { get; set; }
 
         public ICollection<Role> Role { get; set; }
 

@@ -9,6 +9,7 @@ using Rookie.Ecom.DataAccessor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,6 +88,12 @@ namespace Rookie.Ecom.Business.Services
                 TotalItems = assets.TotalItems,
                 Items = _mapper.Map<IEnumerable<ProductRatingDto>>(assets.Items)
             };
+        }
+
+        public async Task<IEnumerable<ProductRatingDto>> GetAllByAsync(Expression<Func<ProductRating, bool>> filter, string includeProperties = "")
+        {
+            var productRating = await _baseRepository.GetAllByAsync(filter, includeProperties);
+            return _mapper.Map<List<ProductRatingDto>>(productRating);
         }
     }
 }

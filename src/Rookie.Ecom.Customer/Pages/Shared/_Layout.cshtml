@@ -10,6 +10,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/slicknav.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -109,7 +110,7 @@
                                 @if (Context.User.Identity.IsAuthenticated)
                                 {
                                     <a class="nav-item nav-link">Welcome, @User.Claims.Where(m=>m.Type=="given_name").SingleOrDefault().Value.ToString()  @User.Claims.Where(m=>m.Type=="family_name").SingleOrDefault().Value.ToString()</a>
-                                    <a href="/login" class="nav-item nav-link">Logout</a>
+                                    <a href="/logout" class="nav-item nav-link">Logout</a>
                                 }
                                 else
                                 {
@@ -138,12 +139,12 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-page="/ShopGrid">Sản phẩm</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a asp-page="#">Whey Proteins</a></li>
-                                    <li><a asp-page="#">BCAA Amino Acid</a></li>
-                                    <li><a asp-page="#">Pre Workout, Post Workout</a></li>
-                                    <li><a asp-page="#">Vitamin - Khoáng chất</a></li>
-                                    <li><a asp-page="#">Thực phẩm giảm cân</a></li>
-                                    <li><a asp-page="#">Phụ kiện</a></li>
+                                    <li><a href="ShopGrid?category=Whey Protein">Whey Proteins</a></li>
+                                    <li><a href="ShopGrid?category=BCAA Amino Acid">BCAA Amino Acid</a></li>
+                                    <li><a href="ShopGrid?category=Pre Workout, Post Workout ">Pre Workout, Post Workout</a></li>
+                                    <li><a href="ShopGrid?category=Vitamin - Khoáng chất">Vitamin - Khoáng chất</a></li>
+                                    <li><a href="ShopGrid?category=Thực phẩm giảm cân">Thực phẩm giảm cân</a></li>
+                                    <li><a href="ShopGrid?category=Phụ kiện">Phụ kiện</a></li>
                                 </ul>
                             </li>
                             <li><a asp-page="#">Thương hiệu</a></li>
@@ -175,12 +176,12 @@
                                 <span>Danh mục</span>
                             </div>
                             <ul>
-                                <li><a href="#">Whey Proteins</a></li>
-                                <li><a href="#">BCAA Amino Acid</a></li>
-                                <li><a href="#">Pre Workout, Post Workout</a></li>
-                                <li><a href="#">Vitamin - Khoáng chất</a></li>
-                                <li><a href="#">Thực phẩm giảm cân</a></li>
-                                <li><a href="#">Phụ kiện</a></li>
+                                <li><a href="ShopGrid?category=Whey Protein">Whey Proteins</a></li>
+                                <li><a href="ShopGrid?category=BCAA Amino Acid">BCAA Amino Acid</a></li>
+                                <li><a href="ShopGrid?category=Pre Workout, Post Workout ">Pre Workout, Post Workout</a></li>
+                                <li><a href="ShopGrid?category=Vitamin - Khoáng chất">Vitamin - Khoáng chất</a></li>
+                                <li><a href="ShopGrid?category=Thực phẩm giảm cân">Thực phẩm giảm cân</a></li>
+                                <li><a href="ShopGrid?category=Phụ kiện">Phụ kiện</a></li>
                             </ul>
                         </div>
                     </div>

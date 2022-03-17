@@ -18,21 +18,25 @@ namespace Rookie.Ecom.Customer.Pages
 
         private IProductService _productService;
         private IProductPictureService _productPicture;
+        private ICategoryService _categoryService;
 
-        public IndexModel(IProductService productService, IProductPictureService productPicture)
+        public IndexModel(IProductService productService, IProductPictureService productPicture, ICategoryService categoryService)
         {
             _productService = productService;
             _productPicture = productPicture;
+            _categoryService = categoryService;
         }
 
         public PagedResponseModel<ProductDto> ListItem { get; set; }
+        public IEnumerable<CategoryDto> ListCategory { get; set; }
 
         [BindProperty]
         public string pId { get; set; }
 
         public void OnGet()
         {
-            ListItem = _productService.PagedQueryAsync(x => x.Name != null, 1, 10, "ProductPictures").Result;
+            ListItem = _productService.PagedQueryAsync(x => x.Name != null, 1, 16, "ProductPictures,Category").Result;
+            ListCategory = _categoryService.GetAllAsync().Result;
         }
 
         [Authorize]

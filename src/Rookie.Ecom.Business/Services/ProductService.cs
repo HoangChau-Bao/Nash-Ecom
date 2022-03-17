@@ -105,5 +105,11 @@ namespace Rookie.Ecom.Business.Services
             var product = await _baseRepository.GetByAsync(filter, includeProperties);
             return _mapper.Map<ProductDto>(product);
         }
+
+        public async Task<IEnumerable<ProductDto>> GetAllByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "")
+        {
+            var product = await _baseRepository.GetAllByAsync(filter, includeProperties);
+            return _mapper.Map<List<ProductDto>>(product);
+        }
     }
 }
