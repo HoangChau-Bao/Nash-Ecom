@@ -109,14 +109,25 @@
 
                                 @if (Context.User.Identity.IsAuthenticated)
                                 {
+
                                     <a class="nav-item nav-link">Welcome, @User.Claims.Where(m=>m.Type=="given_name").SingleOrDefault().Value.ToString()  @User.Claims.Where(m=>m.Type=="family_name").SingleOrDefault().Value.ToString()</a>
-                                    <a href="/logout" class="nav-item nav-link">Logout</a>
+                                    @*<form>
+                                        <a type="submit" class="nav-item nav-link" asp-action="Logout">
+                                        Logout
+
+                                        <input type="hidden" name="logoutId" value="@User.Claims.ToList()[2].Value" />
+
+                                        </a>
+                                        </form>*@
+                                    <a href="/logout"><i class="fa fa-user"></i> Đăng xuất</a>
                                 }
                                 else
                                 {
                                     <a href="/login"><i class="fa fa-user"></i> Đăng nhập</a>
                                     @*<a href="/login" class="nav-item nav-link">Login</a> *@
-                                    <a href="" class="nav-item nav-link">Đăng ký</a>
+                                    <div>
+                                        <a asp-controller="Account" asp-action="Register">Register</a>
+                                    </div>
                                 }
 
                             </div>

@@ -52,9 +52,11 @@ namespace Rookie.Ecom.Customer.Pages
             {
                 ProductDto product = new ProductDto();
                 product = _productService.GetByIdAsync(Guid.Parse(productid)).Result;
-                //var user = User.Claims.ToList();
+                var user = User.Claims.ToList();
+                var userName = user[7].Value + " " + user[8].Value;
                 var id = User.Claims.ToList()[2].Value;
                 ProductRatingDto rate = new ProductRatingDto();
+                rate.UserName = userName;
                 rate.Id = Guid.NewGuid();
                 rate.Comment = comment;
                 rate.CreatedDate = DateTime.Now;

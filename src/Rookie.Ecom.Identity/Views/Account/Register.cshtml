@@ -1,0 +1,19 @@
+﻿@model RegisterViewModel
+
+<h3>Đăng ký</h3>
+<br />
+<form asp-controller="Account" asp-action="Register" method="post">
+    <label> Họ : </label>
+    <input type="text" asp-for="FirstName" size="15" /> <br> <br>
+    <label> Tên : </label>
+    <input type="text" asp-for="LastName" size="30" /> <br> <br>
+
+    Tài khoản :
+    <input type="text" id="username" asp-for="Username" pattern="([A-Za-z1-9]).{4,}" /> <br>
+    <br>
+    Mật khẩu :
+    <input type="Password" id="pass" asp-for="Password" pattern="([A-Za-z1-9]).{4,}"> <br>
+    <br> <br>
+    <input type="submit" />
+</form>
+</div>

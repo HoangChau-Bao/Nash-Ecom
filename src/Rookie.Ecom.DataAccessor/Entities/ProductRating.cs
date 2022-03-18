@@ -20,5 +20,7 @@ namespace Rookie.Ecom.DataAccessor.Entities
 
         public int Rating { get; set; }
 
+        public string UserName { get; set; }    
+
     }
 }

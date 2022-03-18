@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rookie.Ecom.Identity.Data;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -376,6 +377,55 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
             return vm;
+        }
+
+
+        [HttpGet]
+        public IActionResult Register(string returnUrl)
+        {
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var user = new IdentityUser(vm.Username);
+
+            // gather some context stuff
+
+            // gather the user manager
+
+            // add a country claim (given you have the userId)
+
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            if (result.Succeeded)
+            {
+
+                await _userManager.AddClaimAsync(_userManager.FindByNameAsync(vm.Username).GetAwaiter().GetResult(), new Claim(JwtClaimTypes.GivenName, vm.LastName));
+                await _userManager.AddClaimAsync(_userManager.FindByNameAsync(vm.Username).GetAwaiter().GetResult(), new Claim(JwtClaimTypes.FamilyName, vm.FirstName));
+
+                var user_login = await _userManager.FindByNameAsync(vm.Username);
+                AuthenticationProperties props = null;
+
+                var userClaim = await _userManager.GetClaimsAsync(user_login);
+                // issue authentication cookie with subject ID and username
+                var isuser = new IdentityServerUser(user_login.Id)
+                {
+                    DisplayName = user_login.Id,
+                    AdditionalClaims = userClaim
+                };
+                await HttpContext.SignInAsync(isuser, props);
+
+                return Redirect(vm.ReturnUrl);
+            }
+
+            return View();
         }
     }
 }
