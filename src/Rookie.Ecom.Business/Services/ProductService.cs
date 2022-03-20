@@ -33,14 +33,21 @@ namespace Rookie.Ecom.Business.Services
             return _mapper.Map<ProductDto>(item);
         }
 
+        public async Task<ProductInfoDto> AddAsync1(ProductInfoDto productInfoDto)
+        {
+            var product = _mapper.Map<Product>(productInfoDto);
+            var item = await _baseRepository.AddAsync(product);
+            return _mapper.Map<ProductInfoDto>(item);
+        }
+
         public async Task DeleteAsync(Guid id)
         {
             await _baseRepository.DeleteAsync(id);
         }
 
-        public async Task UpdateAsync(ProductDto productDto)
+        public async Task UpdateAsync(ProductInfoDto productInfoDto)
         {
-            var product = _mapper.Map<Product>(productDto);
+            var product = _mapper.Map<Product>(productInfoDto);
             await _baseRepository.UpdateAsync(product);
         }
 
@@ -110,6 +117,27 @@ namespace Rookie.Ecom.Business.Services
         {
             var product = await _baseRepository.GetAllByAsync(filter, includeProperties);
             return _mapper.Map<List<ProductDto>>(product);
+        }
+
+        public async Task<PagedResponseModel<ProductDto>> PagedQueryAsyncDefaul(string name, int page, int limit)
+        {
+            var query = _baseRepository.Entities;
+
+            query = query.Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name));
+
+            query = query.OrderBy(x => x.Name);
+
+            var assets = await query
+                .AsNoTracking()
+                .PaginateAsync(page, limit);
+
+            return new PagedResponseModel<ProductDto>
+            {
+                CurrentPage = assets.CurrentPage,
+                TotalPages = assets.TotalPages,
+                TotalItems = assets.TotalItems,
+                Items = _mapper.Map<IEnumerable<ProductDto>>(assets.Items)
+            };
         }
     }
 }

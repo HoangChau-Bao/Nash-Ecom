@@ -28,13 +28,19 @@ namespace Rookie.Ecom.Business
                 
             CreateMap<ProductRatingDto, ProductRating>();
 
+            CreateMap<UserDto, User>();
+
             CreateMap<ProductGroupDto, ProductGroup>();
+
+            CreateMap<ProductInfoDto, Product>();
         }
 
         private void FromDataAccessorLayer()
         {
+            CreateMap<User, UserDto>();
             CreateMap<Category, CategoryDto>();
             CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductInfoDto>();
             CreateMap<ProductPicture, ProductPictureDto>();
             CreateMap<Brand, BrandDto>();
             CreateMap<Order, OrderDto>();

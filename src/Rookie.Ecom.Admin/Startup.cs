@@ -10,6 +10,10 @@ using Rookie.Ecom.Admin.Filters;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Rookie.Ecom.DataAccessor.Data;
 
 namespace Rookie.Ecom.Admin
 {
@@ -42,10 +46,12 @@ namespace Rookie.Ecom.Admin
                 ops.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                 ops.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
-
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddHttpContextAccessor();
             services.AddBusinessLayer(Configuration);
             services.AddSwaggerGen();
+
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

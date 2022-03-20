@@ -29,10 +29,19 @@
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
-                    <div class="product__details__pic__item">
+                    @if(Model.product.ProductPictures.FirstOrDefault() != null){
+                        <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
                              src="@Model.product.ProductPictures.FirstOrDefault().PictureUrl" alt="">
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                         <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="img/product/product-11.jpg" alt="">
+                        </div>
+                    }
                     <div class="product__details__pic__slider owl-carousel">
                         @foreach (var picture in @Model.product.ProductPictures)
                         {
@@ -59,7 +68,9 @@
                     <!--Decription-->
                     <p>@Model.product.Desc</p>
                     <div class="row">
-                        @foreach (var item in @Model.productGroup.Products)
+                        @if(@Model.productGroup != null)
+                        {
+                             @foreach (var item in @Model.productGroup.Products)
                         {
                             if (item.Id == Model.product.Id)
                             {
@@ -88,6 +99,8 @@
                                 </div>
                             }
                         }
+                        }
+                       
                     </div>
                     <div class="product__details__quantity" style="padding-top:50px">
                         <div class="quantity">

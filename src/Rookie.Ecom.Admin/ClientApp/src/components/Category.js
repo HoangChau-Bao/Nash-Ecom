@@ -25,8 +25,7 @@ class Category extends Component {
     render() {
         return (
             <div>
-                <h1>Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+                <h1>Categories Manage</h1>
                 {renderCategoryTable(this.props)}
                 {renderPagination(this.props)}
             </div>
@@ -37,30 +36,42 @@ class Category extends Component {
 function renderCategoryTable(props) {
     console.log(props);
     return (
-        <table className='table table-striped'>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Desc</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.categories.map(cat =>
-                    <tr key={cat.id}>
+        <div><div className='add'>
+            <a href="/addcategory">
+                Add new category
+            </a>
+        </div><table className='table table-striped'>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Desc</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.categories.map(cat => <tr key={cat.id}>
                         <td>{cat.id}</td>
                         <td>{cat.name}</td>
                         <td>{cat.desc}</td>
+                        <td>
+                            <a href="/updatecategory">
+                                Edit
+                            </a>
+                        </td>
                     </tr>
-                )}
-            </tbody>
-        </table>
+                    )}
+                </tbody>
+
+            </table></div>
+
     );
 }
 
 function renderPagination(props) {
-    const prevStartDateIndex = (props.page || 0) - 5;
-    const nextStartDateIndex = (props.page || 0) + 5;
+    const prevStartDateIndex = (props.page || 1) - 1;
+    const nextStartDateIndex = (props.page || 1) + 1;
 
     return <p className='clearfix text-center'>
         <Link className='btn btn-default pull-left' to={`/category/${prevStartDateIndex}`}>Previous</Link>

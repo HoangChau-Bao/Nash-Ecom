@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Rookie.Ecom.DataAccessor.Entities;
 
 namespace Rookie.Ecom.DataAccessor.Data
@@ -15,6 +16,7 @@ namespace Rookie.Ecom.DataAccessor.Data
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserAddress> UserAddress { get; set; }
+        
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,6 +25,7 @@ namespace Rookie.Ecom.DataAccessor.Data
             //db first
             //model first
         }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

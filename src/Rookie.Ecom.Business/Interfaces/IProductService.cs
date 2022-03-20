@@ -22,12 +22,17 @@ namespace Rookie.Ecom.Business.Interfaces
 
         Task<ProductDto> AddAsync(ProductDto productDto);
 
+        Task<ProductInfoDto> AddAsync1(ProductInfoDto productInfoDto);
+
         Task DeleteAsync(Guid id);
 
-        Task UpdateAsync(ProductDto productDto);
+
+        Task UpdateAsync(ProductInfoDto productInfoDto);
 
         Task<ProductDto> GetByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "");
 
         Task<IEnumerable<ProductDto>> GetAllByAsync(Expression<Func<Product, bool>> filter, string includeProperties = "");
+
+        Task<PagedResponseModel<ProductDto>> PagedQueryAsyncDefaul(string name, int page, int limit);
     }
 }

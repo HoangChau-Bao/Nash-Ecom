@@ -42,7 +42,10 @@ namespace Rookie.Ecom.Customer.Pages
         {
 
             product = _productService.GetByAsync(x => x.Id == productid, "ProductPictures,Category,Brand,ProductGroup").Result;
-            productGroup = _productGroupService.GetByAsync(x => x.Id == product.ProductGroupId, "Products").Result;
+            if (product.ProductGroup != null)
+                productGroup = _productGroupService.GetByAsync(x => x.Id == product.ProductGroupId, "Products").Result;
+            else
+                productGroup = null;
             productRating = _productRatingService.GetAllByAsync(x => x.ProductID == product.Id, "").Result;
         }
 

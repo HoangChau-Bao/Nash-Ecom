@@ -24,18 +24,18 @@ namespace Rookie.Ecom.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductDto>> CreateAsync([FromBody] ProductDto productDto)
+        public async Task<ActionResult<ProductInfoDto>> CreateAsync([FromBody] ProductInfoDto productInfoDto)
         {
-            Ensure.Any.IsNotNull(productDto, nameof(productDto));
-            var asset = await _productService.AddAsync(productDto);
+            Ensure.Any.IsNotNull(productInfoDto, nameof(productInfoDto));
+            var asset = await _productService.AddAsync1(productInfoDto);
             return Created(Endpoints.Product, asset);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] ProductDto productDto)
+        public async Task<ActionResult> UpdateAsync([FromBody] ProductInfoDto productInfoDto)
         {
-            Ensure.Any.IsNotNull(productDto, nameof(productDto));
-            await _productService.UpdateAsync(productDto);
+            Ensure.Any.IsNotNull(productInfoDto, nameof(productInfoDto));
+            await _productService.UpdateAsync(productInfoDto);
 
             return NoContent();
         }
@@ -53,17 +53,17 @@ namespace Rookie.Ecom.Admin.Controllers
         public async Task<ProductDto> GetByIdAsync(Guid id)
             => await _productService.GetByIdAsync(id);
 
-/*        [HttpGet]
-        public async Task<IEnumerable<ProductDto>> GetAllByAsync()
-            => await _productService.GetAllByAsync(null, "");
+        /*        [HttpGet]
+                public async Task<IEnumerable<ProductDto>> GetAllByAsync()
+                    => await _productService.GetAllByAsync(null, "");
 
-        [HttpGet]
-        public async Task<ProductDto> GetByAsync()
-            => await _productService.GetByAsync(null, "");*/
+                [HttpGet]
+                public async Task<ProductDto> GetByAsync()
+                    => await _productService.GetByAsync(null, "");*/
 
         [HttpGet("find")]
         public async Task<PagedResponseModel<ProductDto>>
-            FindAsync(int page = 1, int limit = 10)
-            => await _productService.PagedQueryAsync(null, page, limit, null);
+            FindAsync(string name, int page = 1, int limit = 5)
+            => await _productService.PagedQueryAsyncDefaul(name, page, limit);
     }
 }

@@ -18,7 +18,7 @@
                             <h5><a href="ShopGrid?category=@category.Name">@category.Name</a></h5>
                         </div>
                     </div>
-                }              
+                }
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 <div class="featured__controls">
                     <ul>
                         <li class="active" data-filter="*">All</li>
-                        @foreach(var item in Model.ListCategory)
+                        @foreach (var item in Model.ListCategory)
                         {
                             <li data-filter=".@item.Name.Replace(" ","-")">@item.Name</li>
                         }
@@ -48,11 +48,24 @@
             {
                 <div class="col-lg-3 col-md-4 col-sm-6 mix @item.Category.Name.Replace(" ","-")">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="@item.ProductPictures.FirstOrDefault().PictureUrl">
+                        
+                        @if (item.ProductPictures.FirstOrDefault() == null)
+                            {
+                            <div class="featured__item__pic set-bg" data-setbg="img/product/product-11.jpg">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
-                        </div>
+                            </div>
+                            }
+                            else
+                            {
+                            <div class="featured__item__pic set-bg" data-setbg="@item.ProductPictures.FirstOrDefault().PictureUrl">
+                            <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                            </div>
+                            }
+
                         <div class="featured__item__text">
                             <h6><a style="cursor:pointer" onclick="onProductNameClick('@(item.Id)')">@item.Name (@item.Weight kg)</a></h6>
                             <h5>@string.Format(format, "{0:C}", @item.Cost)</h5>
